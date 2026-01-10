@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
 import logoImg from '../../assets/trinetra_logo.png';
+
+import FeedbackDialog from '../ui/feedback-dialog';
 
 const Navbar: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +29,9 @@ const Navbar: React.FC = () => {
 
     return (
         <nav
-            className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-md py-4' : 'bg-transparent py-6'
+            className={`fixed w-full z-50 transition-all duration-300 ${isScrolled
+                ? 'bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg shadow-sm border-b border-gray-200/50 dark:border-slate-800/50 py-3'
+                : 'bg-transparent py-5'
                 }`}
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
@@ -36,9 +39,9 @@ const Navbar: React.FC = () => {
                     <img
                         src={logoImg}
                         alt="Trinetra Logo"
-                        className="w-12 h-12 object-contain filter drop-shadow-md group-hover:scale-110 transition-transform"
+                        className={`w-12 h-12 object-contain filter drop-shadow-md group-hover:scale-110 transition-transform ${isScrolled ? 'invert dark:invert-0' : ''}`}
                     />
-                    <span className="text-2xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent transform group-hover:scale-105 transition-transform origin-left">
+                    <span className={`text-2xl font-display font-bold transform group-hover:scale-105 transition-transform origin-left ${isScrolled ? 'text-slate-800 dark:text-white' : 'text-white'}`}>
                         TRINETRA
                     </span>
                 </a>
@@ -55,29 +58,25 @@ const Navbar: React.FC = () => {
                             {link.name.toUpperCase()}
                         </a>
                     ))}
+
+                    <FeedbackDialog>
+                        <button className={`transition-colors text-sm font-bold tracking-wide uppercase ${isScrolled ? 'text-slate-700 hover:text-teal-700 dark:text-slate-200 dark:hover:text-teal-400' : 'text-white/90 hover:text-white'
+                            }`}>
+                            Feedback
+                        </button>
+                    </FeedbackDialog>
+
                     <div className="flex items-center space-x-4 ml-4">
                         <button
                             onClick={toggleTheme}
                             className={`p-2 rounded-full transition-colors ${isScrolled
-                                    ? 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
-                                    : 'text-white/90 hover:bg-white/10'
+                                ? 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800'
+                                : 'text-white/90 hover:bg-white/10'
                                 }`}
                             aria-label="Toggle Theme"
                         >
                             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
                         </button>
-                        <Link
-                            to="/login"
-                            className={`text-sm font-bold transition-colors ${isScrolled ? 'text-slate-900 hover:text-teal-700 dark:text-white dark:hover:text-teal-400' : 'text-white hover:text-teal-200'}`}
-                        >
-                            Log In
-                        </Link>
-                        <Link
-                            to="/signup"
-                            className="px-6 py-2 bg-gradient-to-r from-teal-600 to-blue-600 rounded-full text-white text-sm font-semibold hover:shadow-lg transition-all hover:scale-105"
-                        >
-                            Sign Up
-                        </Link>
                     </div>
                 </div>
 
@@ -86,8 +85,8 @@ const Navbar: React.FC = () => {
                     <button
                         onClick={toggleTheme}
                         className={`p-2 rounded-full transition-colors ${isScrolled
-                                ? 'text-slate-600 dark:text-slate-300'
-                                : 'text-white/90'
+                            ? 'text-slate-600 dark:text-slate-300'
+                            : 'text-white/90'
                             }`}
                         aria-label="Toggle Theme"
                     >
@@ -122,20 +121,13 @@ const Navbar: React.FC = () => {
                                     {link.name}
                                 </a>
                             ))}
-                            <Link
-                                to="/login"
-                                onClick={() => setIsOpen(false)}
-                                className="text-gray-700 dark:text-slate-200 hover:text-teal-600 dark:hover:text-teal-400 text-lg font-medium"
-                            >
-                                Log In
-                            </Link>
-                            <Link
-                                to="/signup"
-                                onClick={() => setIsOpen(false)}
-                                className="text-teal-600 font-bold text-lg"
-                            >
-                                Sign Up
-                            </Link>
+                            <div onClick={() => setIsOpen(false)}>
+                                <FeedbackDialog>
+                                    <button className="text-gray-700 dark:text-slate-200 hover:text-teal-600 dark:hover:text-teal-400 text-lg font-medium w-full text-left">
+                                        Feedback
+                                    </button>
+                                </FeedbackDialog>
+                            </div>
                         </div>
                     </motion.div>
                 )}

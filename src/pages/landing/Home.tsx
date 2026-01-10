@@ -8,7 +8,7 @@ import Solution from '../../components/sections/Solution';
 import Architecture from '../../components/sections/Architecture';
 import Team from '../../components/sections/Team';
 import LeadersMessage from '../../components/sections/LeadersMessage';
-import Contact from '../../components/sections/Contact';
+
 import Footer from '../../components/layout/Footer';
 
 const Home: React.FC = () => {
@@ -23,7 +23,6 @@ const Home: React.FC = () => {
             <Architecture />
             <LeadersMessage />
             <Team />
-            <Contact />
             <Footer />
         </div>
     );

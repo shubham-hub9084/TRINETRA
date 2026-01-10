@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Linkedin, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ExpandableGallery } from '@/components/ui/gallery-animation';
 import teamGroupImg1 from '../../assets/Team.jpg';
 import teamGroupImg2 from '../../assets/Team-2.jpeg';
 import teamGroupImg3 from '../../assets/Team-3.jpg';
@@ -62,14 +63,7 @@ const teamMembers: TeamMember[] = [
 const teamImages = [teamGroupImg1, teamGroupImg2, teamGroupImg3];
 
 const Team: React.FC = () => {
-    const [currentImage, setCurrentImage] = useState(0);
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentImage((prev) => (prev + 1) % teamImages.length);
-        }, 5000);
-        return () => clearInterval(timer);
-    }, []);
 
     return (
         <section id="team" className="py-24 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
@@ -99,30 +93,14 @@ const Team: React.FC = () => {
                 {/* Life at Trinetra Carousel */}
                 <div className="mb-24">
                     <div className="flex flex-col items-center mb-8">
-                        <span className="text-sm font-bold tracking-[0.2em] text-teal-600 dark:text-teal-400 uppercase mb-2">Life at Trinetra</span>
+                        <span className="text-sm font-bold tracking-[0.2em] text-teal-600 dark:text-teal-400 uppercase mb-2">-</span>
                         <div className="h-1 w-12 bg-teal-600 dark:bg-teal-400 rounded-full" />
                     </div>
 
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.98 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        className="relative rounded-2xl overflow-hidden shadow-2xl max-w-5xl mx-auto h-[400px] md:h-[500px]"
-                    >
-                        <AnimatePresence mode="wait">
-                            <motion.img
-                                key={currentImage}
-                                src={teamImages[currentImage]}
-                                alt="Team Moment"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.8 }}
-                                className="absolute inset-0 w-full h-full object-cover"
-                            />
-                        </AnimatePresence>
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
-                    </motion.div>
+                    <ExpandableGallery
+                        images={teamImages}
+                        className="max-w-5xl mx-auto"
+                    />
                 </div>
 
                 {/* Team Grid (Single Collection) */}

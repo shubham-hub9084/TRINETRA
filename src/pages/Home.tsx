@@ -8,8 +8,9 @@ import Solution from '../components/sections/Solution';
 import Architecture from '../components/sections/Architecture';
 import Team from '../components/sections/Team';
 import LeadersMessage from '../components/sections/LeadersMessage';
-import Contact from '../components/sections/Contact';
+
 import Footer from '../components/layout/Footer';
+import FeedbackDialog from '../components/ui/feedback-dialog';
 
 const Home: React.FC = () => {
     return (
@@ -23,8 +24,10 @@ const Home: React.FC = () => {
             <Architecture />
             <LeadersMessage />
             <Team />
-            <Contact />
             <Footer />
+            <div className="fixed bottom-4 right-4 z-50">
+                <FeedbackDialog />
+            </div>
         </div>
     );
 };

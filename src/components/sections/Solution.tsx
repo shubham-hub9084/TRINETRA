@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
-import detectionImg from '../../assets/trinetra_detection_ai.png';
+import detectionImg from '../../assets/trinetra_detection_ai_v2.png';
 import eliminationImg from '../../assets/trinetra_elimination_drones.png';
 import awarenessImg from '../../assets/trinetra_awareness_campaign.png';
 
