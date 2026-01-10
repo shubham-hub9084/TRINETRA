@@ -60,9 +60,13 @@ const Navbar: React.FC = () => {
                     ))}
 
                     <FeedbackDialog>
-                        <button className={`transition-colors text-sm font-bold tracking-wide uppercase ${isScrolled ? 'text-slate-700 hover:text-teal-700 dark:text-slate-200 dark:hover:text-teal-400' : 'text-white/90 hover:text-white'
+                        <button className={`relative flex items-center gap-2 transition-colors text-sm font-bold tracking-wide uppercase ${isScrolled ? 'text-slate-700 hover:text-teal-700 dark:text-slate-200 dark:hover:text-teal-400' : 'text-white/90 hover:text-white'
                             }`}>
-                            Feedback
+                            <span>Feedback</span>
+                            <span className="relative flex h-2.5 w-2.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500"></span>
+                            </span>
                         </button>
                     </FeedbackDialog>
 
@@ -123,8 +127,12 @@ const Navbar: React.FC = () => {
                             ))}
                             <div onClick={() => setIsOpen(false)}>
                                 <FeedbackDialog>
-                                    <button className="text-gray-700 dark:text-slate-200 hover:text-teal-600 dark:hover:text-teal-400 text-lg font-medium w-full text-left">
-                                        Feedback
+                                    <button className="flex items-center gap-2 text-gray-700 dark:text-slate-200 hover:text-teal-600 dark:hover:text-teal-400 text-lg font-medium w-full text-left">
+                                        <span>Feedback</span>
+                                        <span className="relative flex h-2.5 w-2.5">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500"></span>
+                                        </span>
                                     </button>
                                 </FeedbackDialog>
                             </div>
