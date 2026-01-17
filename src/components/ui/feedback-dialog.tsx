@@ -5,18 +5,26 @@ import { Portal } from "@ark-ui/react/portal";
 import { X, MessageSquare } from "lucide-react";
 import { useState } from "react";
 
-export default function FeedbackDialog({ children }: { children?: React.ReactNode }) {
+interface FeedbackDialogProps {
+    children?: React.ReactNode;
+    open?: boolean;
+    onOpenChange?: (details: { open: boolean }) => void;
+}
+
+export default function FeedbackDialog({ children, open, onOpenChange }: FeedbackDialogProps) {
     const [feedback, setFeedback] = useState("");
 
     return (
-        <Dialog.Root>
-            <Dialog.Trigger asChild>
-                {children || (
-                    <button className="rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer inline-flex items-center justify-center">
-                        Feedback
-                    </button>
-                )}
-            </Dialog.Trigger>
+        <Dialog.Root
+            closeOnInteractOutside={false}
+            open={open}
+            onOpenChange={onOpenChange}
+        >
+            {children && (
+                <Dialog.Trigger asChild>
+                    {children}
+                </Dialog.Trigger>
+            )}
             <Portal>
                 <Dialog.Backdrop className="data-[state=open]:animate-backdrop-in data-[state=closed]:animate-backdrop-out fixed inset-0 z-50 bg-black/50 backdrop-blur-xs" />
                 <Dialog.Positioner className="fixed inset-0 z-50 flex items-center justify-center p-4">
